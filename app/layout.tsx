@@ -1,85 +1,29 @@
-import Image from "next/image";
-import type { ReactNode } from "react";
-import { StoreProvider } from "./StoreProvider";
-import { Nav } from "./components/Nav";
-
-import "./styles/globals.css";
-import styles from "./styles/layout.module.css";
-
+import type { ReactNode } from 'react';
+import './styles/globals.css';
+import 'react-tooltip/dist/react-tooltip.css';
+import { Providers } from '@/lib/redux/provider';
+import { Sidebar } from '../components/sidebar';
+import { BottomMenu } from '../components/mobile-menu';
+import AddBusiness from '../components/add-business';
 interface Props {
   readonly children: ReactNode;
 }
 
 export default function RootLayout({ children }: Props) {
   return (
-    <StoreProvider>
+    <Providers>
       <html lang="en">
         <body>
-          <section className={styles.container}>
-            <Nav />
-
-            <header className={styles.header}>
-              <Image
-                src="/logo.svg"
-                className={styles.logo}
-                alt="logo"
-                width={100}
-                height={100}
-              />
-            </header>
-
-            <main className={styles.main}>{children}</main>
-
-            <footer className={styles.footer}>
-              <span>Learn </span>
-              <a
-                className={styles.link}
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                React
-              </a>
-              <span>, </span>
-              <a
-                className={styles.link}
-                href="https://redux.js.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Redux
-              </a>
-              <span>, </span>
-              <a
-                className={styles.link}
-                href="https://redux-toolkit.js.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Redux Toolkit
-              </a>
-              <span>, </span>
-              <a
-                className={styles.link}
-                href="https://react-redux.js.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                React Redux
-              </a>
-              ,<span> and </span>
-              <a
-                className={styles.link}
-                href="https://reselect.js.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Reselect
-              </a>
-            </footer>
-          </section>
+          <main className="absolute right-0 left-0 top-0 flex overflow-y-hidden h-screen bg-base-200">
+            <Sidebar />
+            <AddBusiness />
+            <BottomMenu />
+            <div className="flex-1 overflow-y-auto flex-grow bg-white">
+              {children}
+            </div>
+          </main>
         </body>
       </html>
-    </StoreProvider>
+    </Providers>
   );
 }

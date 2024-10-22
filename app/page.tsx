@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
-import { Counter } from "./components/counter/Counter";
-
-export default function IndexPage() {
-  return <Counter />;
+import DashboardHeader from './components/dashboard-header';
+import DashboardInfo from './components/dashboard-info';
+function Page() {
+  return (
+    <div>
+      <DashboardHeader />
+      <DashboardInfo />
+    </div>
+  );
 }
 
-export const metadata: Metadata = {
-  title: "Redux Toolkit",
-};
+export default Page;
